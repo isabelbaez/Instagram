@@ -2,6 +2,7 @@ package com.example.instagram;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -64,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (e != null) {
                     Log.i(TAG, "Issue with Login: " + e, e);
                 } else {
-                    goFeedActivity();
+                    goMainActivity();
                     Toast.makeText(LoginActivity.this, "Success!",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -72,8 +73,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void goFeedActivity() {
-        Intent i = new Intent(this, FeedActivity.class);
+    private void goMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 }

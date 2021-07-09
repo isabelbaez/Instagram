@@ -1,60 +1,72 @@
 package com.example.instagram;
 
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeedActivity extends AppCompatActivity {
 
+public class FeedFragment extends Fragment {
 
     public static final String TAG = "FeedActivity";
 
-    private RecyclerView rvPosts;
+    RecyclerView rvPosts;
 
     protected PostsAdapter adapter;
     protected List<Post> allPosts;
-    private SwipeRefreshLayout swipeContainer;
-    private EndlessRecyclerViewScrollListener scrollListener;
+    protected SwipeRefreshLayout swipeContainer;
+    protected EndlessRecyclerViewScrollListener scrollListener;
+
+    public FeedFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_feed, container, false);
+    }
 
-        rvPosts = findViewById(R.id.rvPosts);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        rvPosts = view.findViewById(R.id.rvPosts);
 
         // initialize the array that will hold posts and create a PostsAdapter
         allPosts = new ArrayList<>();
-        adapter = new PostsAdapter(this, allPosts);
+        adapter = new PostsAdapter(getContext(), allPosts);
 
         // set the adapter on the recycler view
         rvPosts.setAdapter(adapter);
         // set the layout manager on the recycler view
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvPosts.setLayoutManager(linearLayoutManager);
         // query posts from Instagram
         queryPosts(0);
 
         // Lookup the swipe container view
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         // Setup refresh listener which triggers new data loading
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -83,27 +95,24 @@ public class FeedActivity extends AppCompatActivity {
         rvPosts.addOnScrollListener(scrollListener);
     }
 
-    private void loadNextDataFromApi(int page) {
-        // 1. First, clear the array of data
+    void loadNextDataFromApi(int page) {
         queryPosts(allPosts.size());
-        Integer ay = allPosts.size();
-        Log.i("help", ay.toString());
         // 2. Notify the adapter of the update
         adapter.notifyDataSetChanged(); // or notifyItemRangeRemoved
         // 3. Reset endless scroll listener when performing a new search
         scrollListener.resetState();
     }
 
-    private void fetchFeedAsync(int i) {
+    void fetchFeedAsync(int i) {
         adapter.clear();
         // ...the data has come back, add new items to your adapter...
         queryPosts(0);
         // Now we call setRefreshing(false) to signal refresh has finished
         swipeContainer.setRefreshing(false);
 
-        };
+    };
 
-    private void queryPosts(int skip) {
+    protected void queryPosts(int skip) {
         // specify what type of data we want to query - Post.class
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // include data referred by user key
@@ -131,29 +140,5 @@ public class FeedActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.btnLogout) {
-            //Navigate to respective activity
-            ParseUser.logOut();
-            ParseUser currentUser = ParseUser.getCurrentUser();
-            goLogin();
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void goLogin() {
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
     }
 }

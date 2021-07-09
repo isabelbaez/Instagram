@@ -15,6 +15,15 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         tools:text="isabel" />
 
+    <TextView
+        android:id="@+id/tvTimestamp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        tools:text="8h" />
+
     <ImageView
         android:id="@+id/ivImage"
         android:layout_width="match_parent"
@@ -28,4 +37,5 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         tools:text="i can dig elvis" />
+
 </LinearLayout>

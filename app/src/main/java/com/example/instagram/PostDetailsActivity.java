@@ -1,6 +1,10 @@
 package com.example.instagram;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -53,13 +57,13 @@ public class PostDetailsActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goFeed();
+                goMainActivity();
             }
         });
     }
 
-    private void goFeed() {
-        Intent i = new Intent(this, FeedActivity.class);
+    private void goMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 

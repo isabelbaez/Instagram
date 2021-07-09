@@ -81,7 +81,7 @@ public class SignupActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     // Hooray! Let them use the app now.
-                    goFeedActivity();
+                    goMainActivity();
                 } else {
                     Log.i(TAG, "Issue with SignUp: " + e, e);
                 }
@@ -89,8 +89,8 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    private void goFeedActivity() {
-        Intent i = new Intent(this, FeedActivity.class);
+    private void goMainActivity() {
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 }
