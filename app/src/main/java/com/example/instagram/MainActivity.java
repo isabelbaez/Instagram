@@ -36,8 +36,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private Button btnLogout;
+    
     private Button btnPost;
     private Button btnPicture;
     private ImageView ivPicture;
@@ -131,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
                 // Load the taken image into a preview
                 ivPicture.setImageBitmap(resizedBitmap);
             } else { // Result was a failure
-                Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Picture wasn't taken!",
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -151,15 +151,18 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         String orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
-        int orientation = orientString != null ? Integer.parseInt(orientString) : ExifInterface.ORIENTATION_NORMAL;
+        int orientation = orientString != null ? Integer.parseInt(orientString) :
+                ExifInterface.ORIENTATION_NORMAL;
         int rotationAngle = 0;
         if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = 90;
         if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = 180;
         if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = 270;
         // Rotate Bitmap
         Matrix matrix = new Matrix();
-        matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
-        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
+        matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2,
+                (float) bm.getHeight() / 2);
+        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, bounds.outWidth,
+                bounds.outHeight, matrix, true);
         // Return result
         return rotatedBitmap;
     }
@@ -174,7 +177,8 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Error while saving.", e);
-                    Toast.makeText(MainActivity.this,"Error while saving.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,"Error while saving.",
+                            Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Post save was successful!");
                 etDescription.setText("");
@@ -191,7 +195,8 @@ public class MainActivity extends AppCompatActivity {
             public void done(List<Post> posts, ParseException e) {
                 if (e == null) {
                     for (Post post : posts){
-                        Log.i(TAG, "Post: " + post.getDescription() + ", username: " + post.getUser().getUsername());
+                        Log.i(TAG, "Post: " + post.getDescription() +
+                                ", username: " + post.getUser().getUsername());
                     }
                 } else {
                     Log.i(TAG,"Issue when getting posts: " + e, e);

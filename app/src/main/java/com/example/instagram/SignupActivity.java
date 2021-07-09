@@ -2,6 +2,7 @@ package com.example.instagram;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -80,7 +81,7 @@ public class SignupActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     // Hooray! Let them use the app now.
-                    goMainActivity();
+                    goFeedActivity();
                 } else {
                     Log.i(TAG, "Issue with SignUp: " + e, e);
                 }
@@ -88,8 +89,8 @@ public class SignupActivity extends AppCompatActivity {
         });
     }
 
-    private void goMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
+    private void goFeedActivity() {
+        Intent i = new Intent(this, FeedActivity.class);
         startActivity(i);
     }
 }

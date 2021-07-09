@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         btn2Signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("plis","plis");
                 goSignupActivity();
             }
         });
@@ -65,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (e != null) {
                     Log.i(TAG, "Issue with Login: " + e, e);
                 } else {
-                    goMainActivity();
+                    goFeedActivity();
                     Toast.makeText(LoginActivity.this, "Success!",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -73,8 +72,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void goMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
+    private void goFeedActivity() {
+        Intent i = new Intent(this, FeedActivity.class);
         startActivity(i);
     }
 }
