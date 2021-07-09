@@ -66,7 +66,8 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i(TAG, "Issue with Login: " + e, e);
                 } else {
                     goMainActivity();
-                    Toast.makeText(LoginActivity.this, "Success!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Success!",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });

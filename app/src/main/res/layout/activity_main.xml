@@ -6,21 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnLogout"
+        android:id="@+id/btnPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginRight="115dp"
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:text="Take Picture" />
+
+    <EditText
+        android:id="@+id/etDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log Out"
-        tools:layout_editor_absoluteX="305dp"
-        tools:layout_editor_absoluteY="30dp" />
+        android:layout_below="@+id/ivPicture"
+        android:layout_alignStart="@+id/btnPicture"
+        android:layout_alignEnd="@+id/btnPicture"
+        android:layout_marginStart="-40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="-40dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etDescription"
+        android:layout_alignStart="@+id/btnPicture"
+        android:layout_alignEnd="@+id/btnPicture"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="30dp"
+        android:text="Post" />
+
+    <ImageView
+        android:id="@+id/ivPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnPicture"
+        android:layout_centerInParent="true"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="5dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </RelativeLayout>
