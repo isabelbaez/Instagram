@@ -1,10 +1,12 @@
 package com.example.instagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ public class ProfileFragment extends FeedFragment {
 
     private ProfilePostsAdapter adapter;
     private TextView tvUsername;
+    private Button btnLogout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +42,17 @@ public class ProfileFragment extends FeedFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         tvUsername = view.findViewById(R.id.tvUsername);
+        btnLogout = view.findViewById(R.id.btnLogout);
         rvPosts = view.findViewById(R.id.rvPosts);
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOut();
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                goLogin();
+            }
+        });
 
         tvUsername.setText(ParseUser.getCurrentUser().getUsername());
 
@@ -63,6 +76,7 @@ public class ProfileFragment extends FeedFragment {
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
                 fetchFeedAsync(0);
+                scrollListener.resetState();
             }
         });
         // Configure the refreshing colors
@@ -98,6 +112,11 @@ public class ProfileFragment extends FeedFragment {
         // Now we call setRefreshing(false) to signal refresh has finished
         swipeContainer.setRefreshing(false);
 
+    }
+
+    private void goLogin() {
+        Intent i = new Intent(getContext(), LoginActivity.class);
+        startActivity(i);
     }
 
     @Override

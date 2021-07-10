@@ -53,4 +53,16 @@
         android:layout_marginTop="5dp"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <ProgressBar
+        android:id="@+id/pbPosting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/btnPicture"
+        android:layout_alignEnd="@+id/btnPicture"
+        android:layout_marginStart="66dp"
+        android:layout_marginEnd="67dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="40dp"
+        android:visibility="invisible" />
+
 </RelativeLayout>

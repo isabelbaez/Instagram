@@ -29,6 +29,8 @@ public class PostDetailsActivity extends AppCompatActivity {
     TextView tvDescriptionDetailed;
     TextView tvTimestamp;
     Button btnBack;
+    Button btnLike;
+    TextView tvLikesDetailed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class PostDetailsActivity extends AppCompatActivity {
         tvDescriptionDetailed = findViewById(R.id.tvDescriptionDetailed);
         tvTimestamp = findViewById(R.id.tvTimestamp);
         btnBack = findViewById(R.id.btnBack);
+        btnLike = findViewById(R.id.btnLike);
+        tvLikesDetailed = findViewById(R.id.tvLikesDetailed);
 
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
 
@@ -60,6 +64,21 @@ public class PostDetailsActivity extends AppCompatActivity {
                 goMainActivity();
             }
         });
+
+        btnLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                post.setLikes(post.getLikes() + 1);
+                post.saveInBackground();
+                Integer ay = post.getLikes();
+                Log.i("DREAM", ay.toString());
+                tvLikesDetailed.setText(ay.toString());
+            }
+        });
+
+        Integer ay = post.getLikes();
+        Log.i("DREAM", ay.toString());
+        tvLikesDetailed.setText(ay.toString());
     }
 
     private void goMainActivity() {

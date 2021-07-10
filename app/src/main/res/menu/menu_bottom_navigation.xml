@@ -4,16 +4,19 @@
     <item
         android:id="@+id/feed_action"
         android:enabled="true"
+        android:icon="@drawable/instagram_home_outline_24"
         android:title="Feed"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/post_action"
         android:enabled="true"
+        android:icon="@drawable/instagram_new_post_outline_24"
         android:title="Post"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/profile_action"
         android:enabled="true"
+        android:icon="@drawable/instagram_user_outline_24"
         android:title="Profile"
         app:showAsAction="ifRoom" />
 </menu>

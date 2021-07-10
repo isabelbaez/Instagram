@@ -3,6 +3,7 @@ package com.example.instagram;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -56,12 +57,14 @@ public class MainActivity extends AppCompatActivity {
 
         final FragmentManager fragmentManager = getSupportFragmentManager();
 
-        // define your fragments here
-        //final Fragment fragment1 = new FirstFragment();
-        //final Fragment fragment2 = new SecondFragment();
-        //final Fragment fragment3 = new ThirdFragment();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+
+
         // handle navigation selection
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -85,25 +88,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         bottomNavigationView.setSelectedItemId(R.id.feed_action);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.btnLogout) {
-            //Navigate to respective activity
-            ParseUser.logOut();
-            ParseUser currentUser = ParseUser.getCurrentUser();
-            goLogin();
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void goLogin() {

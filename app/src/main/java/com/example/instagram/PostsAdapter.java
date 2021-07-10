@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -66,6 +67,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
         private ImageView ivImage;
         private TextView tvDescription;
         private TextView tvTimestamp;
+        private Button btnLike;
+        private TextView tvLikes;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +77,8 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             ivImage = itemView.findViewById(R.id.ivImage);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvTimestamp = itemView.findViewById(R.id.tvTimestamp);
+            btnLike = itemView.findViewById(R.id.btnLike);
+            tvLikes = itemView.findViewById(R.id.tvLikes);
         }
 
         public void bind(Post post) {
@@ -88,6 +93,20 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             } else {
                 ivImage.setVisibility(View.GONE);
             }
+            btnLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    post.setLikes(post.getLikes() + 1);
+                    post.saveInBackground();
+                    Integer ay = post.getLikes();
+                    Log.i("DREAM", ay.toString());
+                    tvLikes.setText(ay.toString());
+                }
+            });
+
+            Integer ay = post.getLikes();
+            Log.i("DREAM", ay.toString());
+            tvLikes.setText(ay.toString());
         }
 
         @Override
@@ -138,7 +157,6 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.ViewHolder> 
             Log.i("Error:", "getRelativeTimeAgo failed", e);
             e.printStackTrace();
         }
-
         return "";
     }
 }

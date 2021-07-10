@@ -33,13 +33,26 @@
         tools:layout_editor_absoluteY="394dp" />
 
     <TextView
-        android:id="@+id/tvDescriptionDetailed"
+        android:id="@+id/tvLikesDetailed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivPictureDetailed"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/btnLike"
+        android:text="TextView"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="45dp" />
+
+    <TextView
+        android:id="@+id/tvDescriptionDetailed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLikesDetailed"
         android:layout_alignStart="@+id/ivPictureDetailed"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:text="TextView"
         android:textSize="16sp"
         tools:layout_editor_absoluteX="264dp"
@@ -50,5 +63,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back to Feed" />
+
+    <Button
+        android:id="@+id/btnLike"
+        android:layout_width="25dp"
+        android:layout_height="34dp"
+        android:layout_below="@+id/ivPictureDetailed"
+        android:layout_alignStart="@+id/ivPictureDetailed"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="5dp"
+        app:icon="@drawable/ufi_heart"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:iconSize="20dp"
+        app:strokeColor="#FFFFFF" />
 
 </RelativeLayout>

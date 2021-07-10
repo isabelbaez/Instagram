@@ -75,6 +75,7 @@ public class FeedFragment extends Fragment {
                 // Make sure you call swipeContainer.setRefreshing(false)
                 // once the network request has completed successfully.
                 fetchFeedAsync(0);
+                scrollListener.resetState();
             }
         });
         // Configure the refreshing colors

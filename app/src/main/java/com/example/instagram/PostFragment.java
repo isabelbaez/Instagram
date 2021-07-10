@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -75,6 +76,10 @@ public class PostFragment extends Fragment {
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // on some click or some loading we need to wait for...
+                ProgressBar pb = (ProgressBar) view.findViewById(R.id.pbPosting);
+                pb.setVisibility(ProgressBar.VISIBLE);
+                // run a background job and once complete
                 String description = etDescription.getText().toString();
                 if (description.isEmpty()) {
                     Toast.makeText(getContext(), "Description cannot be empty",
@@ -88,6 +93,7 @@ public class PostFragment extends Fragment {
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description,currentUser,photoFile);
+                pb.setVisibility(ProgressBar.INVISIBLE);
             }
         });
 
